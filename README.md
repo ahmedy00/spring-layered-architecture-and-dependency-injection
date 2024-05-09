@@ -1,5 +1,5 @@
 # Java Spring: Layered Architecture and Dependency Injection
-![spring-layered-architecture.webp](..%2F..%2F..%2FDownloads%2Fspring-layered-architecture.webp)
+![spring-layered-architecture.webp](public/spring-layered-architecture.webp)
 
 ## Presentation Layer
 
