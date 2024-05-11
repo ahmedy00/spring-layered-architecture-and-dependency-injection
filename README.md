@@ -36,12 +36,18 @@ public class UserController {
 
     @GetMapping("/users/{userId}")
     public User getUserById(@PathVariable("userId") Long userId) {
-        return userService.getUser(userId);
+        return userService.getUserById(userId);
     }
 }
 ```
 
 After this stage, the User Controller connects to the User Service and returns the information from the User Service as a response to the client after a series of operations.
+
+**@RestController** annotation indicates that the class is a controller and will behave as a web API.
+
+**@RequestMapping** ensures that all requests to the controller class are mapped to a specific URL path (‘/api’ in the example)
+
+**@GetMapping** directs the incoming HTTP Get request to the relevant method.
 
 <h3 style="color: #42b883;">Business Layer</h3>
 
