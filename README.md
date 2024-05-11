@@ -51,7 +51,39 @@ After this stage, the User Controller connects to the User Service and returns t
 
 <h3 style="color: #42b883;">Business Layer</h3>
 
+This layer acts as a bridge between the Presentation Layer and the Persistence Layer.
+In addition, operations such as the application of business logic, security checks and validation are performed.
 
+With the line `if (userId == null){}` is validating whether the user has a valid id (simple validation).
+
+If not, an error is thrown with the line ` throw new InvalidParameterException(‘Invalid user ID’);`(business logic).
+
+At the controller level, the business layer is accessed with the line `private final UserService userService;` and
+the result from the business layer with the line `userService.getUserById` is returned to the client as a response.
+
+```java
+@Service
+public class UserServiceImpl implements UserService {
+
+    UserRepository userRepository;
+
+    @Override
+    public User getUserById(Long userId) {
+        // Validation
+        if (userId == null) {
+            // Exception handling(business logic)
+            throw new InvalidParameterException("Invalid user ID");
+        }
+        // TODO: Add custom exception.
+        return userRepository.findById(userId).orElseThrow(null);
+    }
+}
+```
+
+@Service annotation is identifying that relevant class is a ‘Service’ component
+and is managed by Spring's Dependency Injection container.
+
+@Override indicates that a method is a redefinition of a method defined in a superclass
 
 <h3 style="color: #42b883;">Persistence Layer</h3>
 
