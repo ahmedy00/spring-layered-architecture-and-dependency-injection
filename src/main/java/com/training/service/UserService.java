@@ -1,6 +1,6 @@
 package com.training.service;
 
-import com.training.dto.User;
+import com.training.entity.User;
 
 public interface UserService {
     User getUserById(Long userId);

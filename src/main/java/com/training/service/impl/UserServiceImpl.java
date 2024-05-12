@@ -1,6 +1,6 @@
 package com.training.service.impl;
 
-import com.training.dto.User;
+import com.training.entity.User;
 import com.training.repository.UserRepository;
 import com.training.service.UserService;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,10 @@ import java.security.InvalidParameterException;
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User getUserById(Long userId) {
