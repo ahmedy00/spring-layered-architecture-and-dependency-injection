@@ -2,7 +2,7 @@
 
 <h2 style="color: #42b883">Layered Architecture</h2>
 In Java Spring, layered architecture refers to the separation of the application into layers that have different responsibilities and work independently of each other.
-Layered architecture is a modern and effective approach for the concept of **maintainability**, which is one of the basic principles of software development.
+Layered architecture is a modern and effective approach for the concept of **maintainability** , which is one of the basic principles of software development.
 It is a necessary method for the maintenance of large projects and for the easy adaptation of new developers joining the project.
 
 ![spring-layered-architecture.webp](public/spring-layered-architecture.webp)
@@ -47,7 +47,7 @@ After this stage, the User Controller connects to the User Service and returns t
 
 **@RequestMapping** ensures that all requests to the controller class are mapped to a specific URL path (‘/api’ in the example)
 
-**@GetMapping** directs the incoming HTTP Get request to the relevant method.
+**@GetMapping** directs the incoming HTTP Get request to the relevant method. Also, this annotation same with `@RequestMapping(path = "/users/{userId}", method = RequestMethod.GET)`.
 
 <h3 style="color: #42b883;">Business Layer</h3>
 
