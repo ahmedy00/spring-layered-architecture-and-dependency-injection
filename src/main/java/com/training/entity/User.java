@@ -1,12 +1,22 @@
 package com.training.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "_user")
 public class User {
+
+    public User() {
+
+    }
+    public User(Long userId, String email, String firstName, String lastName, String username) {
+        this.userId = userId;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -48,6 +58,7 @@ public class User {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String firstName;
     private String lastName;
