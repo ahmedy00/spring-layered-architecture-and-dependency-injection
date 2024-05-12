@@ -1,7 +1,7 @@
 <h1 style="color: #42b883">Java Spring: Layered Architecture and Dependency Injection</h1>
 
 <h2 style="color: #42b883">Layered Architecture</h2>
-In Java Spring, layered architecture refers to the separation of the application into layers that have different responsibilities and work independently of each other.
+In Java Spring, layered architecture means to the separation of the application into layers that have different responsibilities and work independently of each other.
 Layered architecture is a modern and effective approach for the concept of **maintainability** , which is one of the basic principles of software development.
 It is a necessary method for the maintenance of large projects and for the easy adaptation of new developers joining the project.
 
@@ -43,9 +43,9 @@ public class UserController {
 
 After this stage, the User Controller connects to the User Service and returns the information from the User Service as a response to the client after a series of operations.
 
-**@RestController** annotation indicates that the class is a controller and will behave as a web API.
+**@RestController** annotation says that the class is a controller and will behave as a web API.
 
-**@RequestMapping** ensures that all requests to the controller class are mapped to a specific URL path (‘/api’ in the example)
+**@RequestMapping** makes that all requests to the controller class are mapped to a specific URL path (‘/api’ in the example)
 
 **@GetMapping** directs the incoming HTTP Get request to the relevant method. Also, this annotation same with `@RequestMapping(path = "/users/{userId}", method = RequestMethod.GET)`.
 
@@ -58,9 +58,10 @@ With the line `if (userId == null){}` is validating whether the user has a valid
 
 If not, an error is thrown with the line ` throw new InvalidParameterException(‘Invalid user ID’);`(business logic).
 
-At the controller level, the business layer is accessed with the line `private final UserService userService;` and
-the result from the business layer with the line `userService.getUserById` is returned to the client as a response.
+At the controller level, the Business Layer is accessed with the line `private final UserService userService;` and
+the result from the Business Layer with the line `userService.getUserById` is returned to the client as a response.
 
+###### // UserServiceImpl.java
 ```java
 @Service
 public class UserServiceImpl implements UserService {
@@ -83,7 +84,34 @@ public class UserServiceImpl implements UserService {
 @Service annotation is identifying that relevant class is a ‘Service’ component
 and is managed by Spring's Dependency Injection container.
 
-@Override indicates that a method is a redefinition of a method defined in a superclass
+@Override refers that a method is a redefinition of a method defined in a superclass
 
 <h3 style="color: #42b883;">Persistence Layer</h3>
 
+Database interactions are performed in Persistence Layer. Functions containing CRUD operations provided by Spring Framework are used.
+It is also possible to write more complex queries and custom queries considering performance concerns.
+
+###### // UserRepository.java
+```java
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    @Modifying
+    @Transactional
+    @Query(value = "" +
+            "INSERT INTO _user (user_id, email, first_name, last_name, username) " +
+            "VALUES (:userId, :email, :firstName, :lastName, :username)", 
+            nativeQuery = true)
+    int createUserWithCustomQuery(
+            Long userId,
+            String email,
+            String firstName,
+            String lastName,
+            String username);
+
+}
+```
+
+With the `extends JpaRepository` line here, it is possible to use the methods (save, findAll, delete etc.)
+for database operations provided by JpaRepository.
+Also, custom queries can be written with `@Query` annotation.
