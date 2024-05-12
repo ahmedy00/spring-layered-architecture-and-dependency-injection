@@ -1,5 +1,11 @@
-package com.training.dto;
+package com.training.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "_user")
 public class User {
     public Long getUserId() {
         return userId;
@@ -41,6 +47,7 @@ public class User {
         this.email = email;
     }
 
+    @Id
     private Long userId;
     private String firstName;
     private String lastName;
